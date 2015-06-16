@@ -1,0 +1,2 @@
+# slideshow
+Slideshows in javascript
