@@ -18,7 +18,7 @@ var containerDots = document.getElementById('dots'),
 dots = containerDots.getElementsByTagName('li'),
 containerImage = document.getElementById("container");
 
-var secDuration = 5, maxImages = infosImage.length;
+var secDuration = 3, maxImages = infosImage.length, delay;
 
 
 
@@ -126,13 +126,41 @@ function prev(){
 
 // La fonction qui "joue" les images
 function play() {
-  next();
+  //next();
+  setTimeout("next()", secDuration * 1000);
   // On nettoie et relance le timeout
-  clearTimeout();
-  setTimeout("play()", secDuration * 1000);
+  delay = setTimeout("play()", secDuration * 1000);
+  console.log(delay);
+  return delay;
 }
 
+function pause(){
+  console.log(delay);
+  delay = clearTimeout(delay);
+  console.log(delay);
+  return delay;
+}
 
 document.addEventListener('load', getImage(), false);
 document.getElementById("next").addEventListener('click', next, false);
 document.getElementById("prev").addEventListener('click', prev, false);
+document.getElementById("play").addEventListener('click', play, false);
+document.getElementById("pause").addEventListener('click', pause, false);
+
+//function recursion(c){
+//  setTimeout(function(c){
+//      c = c || 0;
+//      console.log(c++);
+//      if(c == 10){
+//        return;
+//      }
+//      recursion(c);
+//  },
+//  2000,
+//  c
+//  );
+//}
+//
+//recursion();
+
+
