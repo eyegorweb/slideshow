@@ -14,13 +14,11 @@ var infosMiniatures = [
   {'id': '3', 'src': 'images/m_photo4.png', 'title': 'Winter'}
 ];
 
-var slider = document.getElementById('slider');
-var containerDots = document.getElementById('dots');
-var dots = containerDots.getElementsByTagName('li');
-var containerImage = document.getElementById("container");
+var containerDots = document.getElementById('dots'),
+dots = containerDots.getElementsByTagName('li'),
+containerImage = document.getElementById("container");
 
-var secDuration = 5,
-maxImages = infosImage.length;
+var secDuration = 5, maxImages = infosImage.length;
 
 
 
@@ -41,9 +39,8 @@ function createElements(json, container, bool, len, index){
     // Create <image> element
     //console.log(index);
     // Delete old image
-    var element = containerImage;
-    while (element.firstChild) {
-      element.removeChild(element.firstChild);
+    while (containerImage.firstChild) {
+      containerImage.removeChild(containerImage.firstChild);
     }
     // Put new image
     // Elément <DIV>
@@ -51,13 +48,13 @@ function createElements(json, container, bool, len, index){
     container.appendChild(link);
     // Eléments <SPAN>
     var desc = document.createElement("dt");
-    // Put data text
+    // Attribute title text
     desc.innerText = json[index].title;
     link.appendChild(desc);
     var content = document.createElement("dd");
     link.insertBefore(content, desc.nextSibling);
     // Eléments <IMG>
-    // Put data image
+    // Attribute image source
     var photo = setAttributes("img", ["src", "alt"], [json[index].src, json[index].title]);
     content.appendChild(photo);
   }else{
@@ -68,11 +65,11 @@ function createElements(json, container, bool, len, index){
       container.appendChild(link);
       // Eléments <A>
       var desc = setAttributes("a", ["id", "class", "href", "title"], ["desc" + json[i].id, "desc" + json[i].id, "", json[i].title]);
-      // Put data text
+      // Attribute title text
       desc.innerText = json[i].title;
       link.appendChild(desc);
       // Eléments <IMG>
-      // Put data minis image
+      // Attribute image source
       var photo = setAttributes("img", ["src", "alt"], [json[i].src, json[i].title]);
       desc.appendChild(photo);
     }
