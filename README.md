@@ -1,2 +1,2 @@
 # slideshow
-Slideshows in javascript
+Slideshows in javascript using different frameworks
