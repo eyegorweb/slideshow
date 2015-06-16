@@ -36,8 +36,8 @@ function setAttributes(tagName, attributes, data){
 
 
 
-function createElements(json, container, link, desc, photo, len, index){
-  if(!desc){
+function createElements(json, container, bool, len, index){
+  if(!bool){
     // Create <image> element
     //console.log(index);
     // Delete old image
@@ -47,10 +47,10 @@ function createElements(json, container, link, desc, photo, len, index){
     }
     // Put new image
     // Elément <DIV>
-    link = setAttributes("dl", ["id", "class"], [json[index].id, "image" + json[index].id]);
+    var link = setAttributes("dl", ["id", "class"], [json[index].id, "image" + json[index].id]);
     container.appendChild(link);
     // Eléments <SPAN>
-    desc = document.createElement("dt");
+    var desc = document.createElement("dt");
     // Put data text
     desc.innerText = json[index].title;
     link.appendChild(desc);
@@ -58,22 +58,22 @@ function createElements(json, container, link, desc, photo, len, index){
     link.insertBefore(content, desc.nextSibling);
     // Eléments <IMG>
     // Put data image
-    photo = setAttributes("img", ["src", "alt"], [json[index].src, json[index].title]);
+    var photo = setAttributes("img", ["src", "alt"], [json[index].src, json[index].title]);
     content.appendChild(photo);
   }else{
     // Create <dots> elements
     for(var i = 0; i < len; i++){
       // Eléments <LI>
-      link = setAttributes("li", ["class"], ["link" + json[i].id]);
+      var link = setAttributes("li", ["class"], ["link" + json[i].id]);
       container.appendChild(link);
       // Eléments <A>
-      desc = setAttributes("a", ["id", "class", "href", "title"], ["desc" + json[i].id, "desc" + json[i].id, "", json[i].title]);
+      var desc = setAttributes("a", ["id", "class", "href", "title"], ["desc" + json[i].id, "desc" + json[i].id, "", json[i].title]);
       // Put data text
       desc.innerText = json[i].title;
       link.appendChild(desc);
       // Eléments <IMG>
       // Put data minis image
-      photo = setAttributes("img", ["src", "alt"], [json[i].src, json[i].title]);
+      var photo = setAttributes("img", ["src", "alt"], [json[i].src, json[i].title]);
       desc.appendChild(photo);
     }
   }
@@ -91,13 +91,13 @@ function getId(){
 function callbackForId(item){
   return function(e){ // Closure to keep each item in a local and own scope
     e.preventDefault(); // prevent links <a> default action
-    createElements(infosImage, containerImage, 'dl: null', '', 'img: null', maxImages, item.id);
+    createElements(infosImage, containerImage, false, maxImages, item.id);
   }
 }
 
 function getImage(){
-  createElements(infosMiniatures, containerDots, 'li: null', 'a: null', 'img: null', maxImages);
-  createElements(infosImage, containerImage, 'dl: null', '', 'img: null', maxImages, 0);
+  createElements(infosMiniatures, containerDots, true, maxImages);
+  createElements(infosImage, containerImage, false, maxImages, 0);
   for(var i = 0; i < maxImages; i++){
     var item = infosImage[i];
     dots[i].addEventListener('click', callbackForId(item), false);
@@ -112,7 +112,7 @@ function next(){
   }else{
     index = index;
   }
-  createElements(infosImage, containerImage, 'dl: null', '', 'img: null', maxImages, index);
+  createElements(infosImage, containerImage, false, maxImages, index);
   //console.log(index);
 }
 
@@ -124,7 +124,7 @@ function prev(){
   }else{
     index = index;
   }
-  createElements(infosImage, containerImage, 'dl: null', '', 'img: null', maxImages, index);
+  createElements(infosImage, containerImage, false, maxImages, index);
 }
 
 // La fonction qui "joue" les images
