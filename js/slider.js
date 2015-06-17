@@ -18,7 +18,7 @@ var containerDots = document.getElementById('dots'),
 dots = containerDots.getElementsByTagName('li'),
 containerImage = document.getElementById("container");
 
-var secDuration = 3, maxImages = infosImage.length, delay;
+var secDuration = 3, maxImages = infosImage.length, timer, delay;
 
 
 
@@ -126,19 +126,17 @@ function prev(){
 
 // La fonction qui "joue" les images
 function play() {
-  //next();
-  setTimeout("next()", secDuration * 1000);
-  // On nettoie et relance le timeout
-  delay = setTimeout("play()", secDuration * 1000);
-  console.log(delay);
-  return delay;
+  // Un setTimeout pour lancer l'image suivante
+  delay = setTimeout("next()", secDuration * 1000);
+  // Un setTimeout pour lancer le play global (récursivité)
+  timer = setTimeout("play()", secDuration * 1000);
 }
 
 function pause(){
-  console.log(delay);
-  delay = clearTimeout(delay);
-  console.log(delay);
-  return delay;
+  clearTimeout(delay);
+  clearTimeout(timer);
+  delay = null;
+  timer = null;
 }
 
 document.addEventListener('load', getImage(), false);
