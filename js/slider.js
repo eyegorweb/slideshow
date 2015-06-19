@@ -15,8 +15,10 @@ var infosMiniatures = [
 ];
 
 var containerDots = document.getElementById('dots'),
-dots = containerDots.getElementsByTagName('li'),
-containerImage = document.getElementById("container");
+  dots = containerDots.getElementsByTagName('li'),
+  containerImage = document.getElementById("container"),
+  nav = document.getElementById('nav'),
+  arrows = nav.getElementsByTagName('a');
 
 var secDuration = 3, maxImages = infosImage.length, timer, delay;
 
@@ -29,8 +31,55 @@ function setAttributes(tagName, attributes, data){
   for(var i = 0; i< attributes.length; i++){
     elmt.setAttribute(attributes[i], data[i]);
   }
+  //console.log(elmt.className);
   return elmt;
 }
+
+// La méthode String.prototype.match() permet d'obtenir le tableau des correspondances entre la chaîne courante et une expression rationnelle
+// Donc pour retrouver le nb de la classe courante à image et le nb des liens correspondant, on peut créer cette fonction:
+// On regarde quelle est la classe de la photo (image0, image1, etc...) => chaîne courante
+// On extrait/sépare les lettres du chiffre de la classe (par exemple: [iamge, 0])
+// On recherche le chiffre correspondant parmi les liens (link0, link1, etc) => expression rationnelle
+// On dit que ce lien à la classe dont l'expression comporte le chiffre recherché possède la classe "active"
+
+/*var str = 'image0';
+var chiffre = '0'; */// ou var chiffre = 0, tester la différence (replace 0 by current index in loop for)
+// Utiliser la syntaxe new RegExp(variable valueToFind, 'flag') et non /[variable valueToFind]/g
+// Préciser le flag (2nd paramètre de RegExp sinon pas de valeurs multiples trouvées renvoyées, uniquement la première)
+//var regexp = new RegExp(chiffre, 'g'); 
+//var tableau_correspondances = str.match(regexp);
+//console.log(tableau_correspondances);
+
+//String.prototype.matchAll = function(withThis) {
+//  var regexp = new RegExp(withThis, 'gi');
+//  return this.match(regexp);
+//};
+//var strin = "IiIImageine999iiII";
+//var matchWith = "i";
+//var toto = strin.matchAll(matchWith);
+//console.log(toto);
+//console.log(String.prototype);
+
+function addClass(item){
+  // Find/Active className
+    var correspondance = [];
+    var chiffre = getId();
+    var str = document.getElementsByTagName('dl')[0].getAttribute('class');
+    var regexp = new RegExp(chiffre, 'g');
+    correspondance = str.match(regexp).toString();
+    for(var j = 0; j < dots.length; j++){
+      item = infosImage[j];
+      if(item.id == correspondance){
+        dots[j].className = ' ';
+        dots[j].className = dots[j].className + ' active';
+      }else{
+        dots[j].className = ' ';
+        dots[j].className = dots[j].className + ' inactive';
+      }
+      
+    }
+}
+
 
 
 
@@ -76,9 +125,10 @@ function createElements(json, container, bool, len, index){
   }
 }
 
+
+
 function getId(){
-  var id = document.getElementsByTagName('dl')[0].attributes.getNamedItem('id').nodeValue;
-  //console.log(id);
+  var id = document.getElementsByTagName('dl')[0].attributes.getNamedItem('id').nodeValue; // OU document.getElementsByTagName('dl')[0].getAttribute('id')
   return id;
 }
 
@@ -89,17 +139,23 @@ function callbackForId(item){
   return function(e){ // Closure to keep each item in a local and own scope
     e.preventDefault(); // prevent links <a> default action
     createElements(infosImage, containerImage, false, maxImages, item.id);
+    addClass(infosImage);
   }
 }
 
 function getImage(){
   createElements(infosMiniatures, containerDots, true, maxImages);
   createElements(infosImage, containerImage, false, maxImages, 0);
+  addClass(infosImage);
+  
+  //console.log(dots);
   for(var i = 0; i < maxImages; i++){
+    //console.log(dots[i].attributes.getNamedItem('class').nodeValue);
     var item = infosImage[i];
     dots[i].addEventListener('click', callbackForId(item), false);
   }
 }
+
 
 function next(){
   var index = getId();
@@ -110,7 +166,7 @@ function next(){
     index = index;
   }
   createElements(infosImage, containerImage, false, maxImages, index);
-  //console.log(index);
+  addClass(infosImage);
 }
 
 function prev(){
@@ -122,6 +178,7 @@ function prev(){
     index = index;
   }
   createElements(infosImage, containerImage, false, maxImages, index);
+  addClass(infosImage);
 }
 
 // La fonction qui "joue" les images
