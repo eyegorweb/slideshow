@@ -20,7 +20,7 @@ var containerDots = document.getElementById('dots'),
   nav = document.getElementById('nav'),
   arrows = nav.getElementsByTagName('a');
 
-var secDuration = 3, maxImages = infosImage.length, timer, delay;
+var secDuration = 3, maxImages = infosImage.length, timer, delay, isPlayed = false;
 
 
 
@@ -123,6 +123,11 @@ function createElements(json, container, bool, len, index){
       desc.appendChild(photo);
     }
   }
+  // Relance le player avec un timer réinitialisé
+  if(isPlayed){
+    pause();
+    play();
+  }
 }
 
 
@@ -167,6 +172,11 @@ function next(){
   }
   createElements(infosImage, containerImage, false, maxImages, index);
   addClass(infosImage);
+  // Relance le player avec un timer réinitialisé
+  if(isPlayed){
+    pause();
+    play();
+  }
 }
 
 function prev(){
@@ -179,6 +189,11 @@ function prev(){
   }
   createElements(infosImage, containerImage, false, maxImages, index);
   addClass(infosImage);
+  // Relance le player avec un timer réinitialisé
+  if(isPlayed){
+    pause();
+    play();
+  }
 }
 
 // La fonction qui "joue" les images
@@ -187,6 +202,7 @@ function play() {
   delay = setTimeout("next()", secDuration * 1000);
   // Un setTimeout pour lancer le play global (récursivité)
   timer = setTimeout("play()", secDuration * 1000);
+  return isPlayed = true;
 }
 
 function pause(){
@@ -194,6 +210,7 @@ function pause(){
   clearTimeout(timer);
   delay = null;
   timer = null;
+  return isPlayed = false;
 }
 
 document.addEventListener('load', getImage(), false);
