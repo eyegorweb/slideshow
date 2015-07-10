@@ -1,0 +1,16 @@
+{
+  "image": {
+    "images": [
+      {'id': '0', 'src': 'images/bird.jpg', 'title': 'Bird'},
+      {'id': '1', 'src': 'images/red_bird.jpg', 'title': 'Red bird'},
+      {'id': '2', 'src': 'images/spring.jpg', 'title': 'Spring'},
+      {'id': '3', 'src': 'images/winter.jpg', 'title': 'Winter'}
+    ],
+    "minis": [
+      {'id': '0', 'src': 'images/m_photo1.png', 'title': 'Bird'},
+      {'id': '1', 'src': 'images/m_photo2.png', 'title': 'Red bird'},
+      {'id': '2', 'src': 'images/m_photo3.png', 'title': 'Spring'},
+      {'id': '3', 'src': 'images/m_photo4.png', 'title': 'Winter'}
+    ]
+  }
+}
