@@ -148,6 +148,7 @@ function callbackForId(item){
   }
 }
 
+// Externalisons la callback dans une fonction callbackForId qui sera une fermeture
 function getImage(){
   createElements(infosMiniatures, containerDots, true, maxImages);
   createElements(infosImage, containerImage, false, maxImages, 0);
@@ -158,6 +159,25 @@ function getImage(){
     //console.log(dots[i].attributes.getNamedItem('class').nodeValue);
     var item = infosImage[i];
     dots[i].addEventListener('click', callbackForId(item), false);
+  }
+}
+
+// Pas d'externalisation de fonction, mais une déclaration de IIFE
+function getImage2(){
+  createElements(infosMiniatures, containerDots, true, maxImages);
+  createElements(infosImage, containerImage, false, maxImages, 0);
+  addClass(infosImage);
+  for(var i = 0; i < maxImages; i++){
+    //console.log(dots[i].attributes.getNamedItem('class').nodeValue);
+    var item = infosImage[i];
+    dots[i].addEventListener('click', (function(item){ // IIFE to encapsulate code
+        return function(e){ // Closure to keep each item in a local and own scope
+          e.preventDefault(); // prevent links <a> default action
+          createElements(infosImage, containerImage, false, maxImages, item.id);
+          addClass(infosImage);
+        }
+      })(item) // Invoke immediately function
+      ,false);
   }
 }
 
@@ -213,7 +233,7 @@ function pause(){
   return isPlayed = false;
 }
 
-document.addEventListener('load', getImage(), false);
+document.addEventListener('load', getImage2(), false);
 document.getElementById("next").addEventListener('click', next, false);
 document.getElementById("prev").addEventListener('click', prev, false);
 document.getElementById("play").addEventListener('click', play, false);
