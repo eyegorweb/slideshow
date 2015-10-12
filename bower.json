@@ -2,11 +2,27 @@
   "name": "Igor Trifunovic",
   "version": "0.0.1",
   "description": "Diaporama in javascript",
-  "main": "slider.js",
-  "moduleType": [],
+  "main": "js/slider.js",
+  "repository": {
+    "type": "https",
+    "url": "https://github.com/eyegorweb/slideshow.git"
+  },
+  "moduleType": [
+  "amd",
+   "globals",
+   "node"
+],
   "authors": [
     "Igor Trifunovic"
   ],
   "license": "Igor Trifunovic",
-  "homepage": ""
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
 }
