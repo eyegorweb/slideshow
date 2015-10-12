@@ -1,0 +1,19 @@
+{
+  "name": "diaporama",
+  "version": "1.0.0",
+  "description": "diaporama in javascript",
+  "main": "/Users/jullien/Sites/diaporama/js/slider.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/eyegorweb/slideshow.git"
+  },
+  "author": "Igor Trifunovic",
+  "license": "Igor Trifunovic",
+  "bugs": {
+    "url": "https://github.com/eyegorweb/slideshow/issues"
+  },
+  "homepage": "https://github.com/eyegorweb/slideshow#readme"
+}
