@@ -1,6 +1,6 @@
 {
   "name": "Igor Trifunovic",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Diaporama in javascript",
   "main": "slider.js",
   "moduleType": [],
