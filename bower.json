@@ -1,0 +1,12 @@
+{
+  "name": "Igor Trifunovic",
+  "version": "0.0.0",
+  "description": "Diaporama in javascript",
+  "main": "slider.js",
+  "moduleType": [],
+  "authors": [
+    "Igor Trifunovic"
+  ],
+  "license": "Igor Trifunovic",
+  "homepage": ""
+}
