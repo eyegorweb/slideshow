@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "diaporama in javascript",
   "main": "/Users/jullien/Sites/diaporama/js/slider.js",
+  "dependencies": {
+    "jshint": "^2.8.0",
+    "uglify-js": "^2.5.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "browserify js/slider.js -o build.js",
+    "watch": "watchify js/slider.js -o build.js -dv"
   },
   "repository": {
     "type": "git",

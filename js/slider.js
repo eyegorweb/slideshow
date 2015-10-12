@@ -1,4 +1,4 @@
-
+// Test watchify...
 
 var infosImage = [
   {'id': '0', 'src': 'images/bird.jpg', 'title': 'Bird'},
