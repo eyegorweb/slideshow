@@ -9,8 +9,11 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "stats": "echo '** GENERATED **' && du -skh dist/web-built.min.js && echo ''",
+    "check": "jshint js/*.js",
+    "uglify": "uglifyjs build.js > dist/web-built.min.js",
     "build": "browserify js/slider.js -o build.js",
-    "watch": "watchify js/slider.js -o build.js -dv"
+    "watch": "npm run check && npm run uglify && watchify js/slider.js -o build.js -dv"
   },
   "repository": {
     "type": "git",
