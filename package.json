@@ -13,7 +13,7 @@
     "check": "jshint js/*.js",
     "uglify": "uglifyjs build.js > dist/web-built.min.js",
     "build": "browserify js/slider.js -o build.js",
-    "watch": "npm run check && npm run uglify && watchify js/slider.js -o build.js -dv"
+    "watch": "npm run check && npm run uglify && npm run build && watchify js/slider.js -o build.js -dv"
   },
   "repository": {
     "type": "git",

@@ -29,7 +29,6 @@ function setAttributes(tagName, attributes, data) {
 	for (var i = 0; i < attributes.length; i++) {
 		elmt.setAttribute(attributes[i], data[i]);
 	}
-	//console.log(elmt.className);
 	return elmt;
 }
 
